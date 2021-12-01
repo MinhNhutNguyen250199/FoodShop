@@ -14,7 +14,7 @@ namespace FoodShopAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+   
     public class ProductsController : ControllerBase
     {
 
@@ -43,6 +43,7 @@ namespace FoodShopAPI.Controllers
             return Ok(product);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -64,6 +65,7 @@ namespace FoodShopAPI.Controllers
         }
         [HttpPut("{productId}")]
         [Consumes("multipart/form-data")]
+        [Authorize]
         public async Task<IActionResult> Update([FromRoute] int productId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -78,6 +80,7 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpDelete("{productId}")]
+        [Authorize]
         public async Task<IActionResult> Delete(int productId)
         {
             var affectedResult = await _productRepository.Delete(productId);
@@ -87,6 +90,7 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpPatch("{productId}/{newPrice}")]
+        [Authorize]
         public async Task<IActionResult> UpdatePrice(int productId, decimal newPrice)
         {
             var isSuccessful = await _productRepository.UpdatePrice(productId, newPrice);
@@ -98,6 +102,7 @@ namespace FoodShopAPI.Controllers
 
         //Images
         [HttpPost("{productId}/images")]
+        [Authorize]
         public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -114,6 +119,7 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpPut("{productId}/images/{imageId}")]
+        [Authorize]
         public async Task<IActionResult> UpdateImage(int imageId, [FromForm] ProductImageUpdateRequest request)
         {
             if (!ModelState.IsValid)
@@ -128,6 +134,7 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpDelete("{productId}/images/{imageId}")]
+        [Authorize]
         public async Task<IActionResult> RemoveImage(int imageId)
         {
             if (!ModelState.IsValid)
@@ -152,6 +159,7 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpPut("{id}/Categories")]
+        [Authorize]
         public async Task<IActionResult> CategoryAssign(int id, [FromBody] CategoryAssignRequest request)
         {
             if (!ModelState.IsValid)

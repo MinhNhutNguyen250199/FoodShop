@@ -27,6 +27,13 @@ namespace FoodShopAPI.Controllers
             return Ok(products);
         }
 
+        [HttpGet("{id}/{languageId}")]
+        public async Task<IActionResult> GetById(string languageId, int id)
+        {
+            var category = await _categoryrepository.GetById(languageId, id);
+            return Ok(category);
+        }
+
 
     }
 }
