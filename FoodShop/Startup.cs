@@ -1,6 +1,9 @@
+using FluentValidation.AspNetCore;
 using FoodShop.LocalizationResources;
+using FoodShopModel.FluentValidator;
 using FoodShopServiceAPI;
 using LazZiya.ExpressLocalization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -43,12 +46,21 @@ namespace FoodShop
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
             });
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(options =>
+             {
+                 options.LoginPath = "/User/Login";
+                 options.AccessDeniedPath = "/User/Forbidden/";
+             });
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ISlideAPI, SlideAPI>();
             services.AddScoped<IProductAPI, ProductAPI>();
             services.AddScoped<ICategoryAPI, CategoryAPI>();
+            services.AddScoped<IUserAPI, UserAPI>();
 
             services.AddControllersWithViews()
+               .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>())
                .AddExpressLocalization<ExpressLocalizationResource, ViewLocalizationResource>(ops =>
                {
                     // When using all the culture providers, the localization process will
@@ -95,7 +107,7 @@ namespace FoodShop
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
             app.UseSession();
             app.UseAuthorization();
@@ -106,7 +118,7 @@ namespace FoodShop
             {
                 endpoints.MapControllerRoute(
                     name: "Product Category En",
-                    pattern: "{culture}/categories/{id}", new
+                    pattern: "{culture}/Category/{id}", new
                     {
                         controller = "Product",
                         action = "Category"
@@ -114,7 +126,7 @@ namespace FoodShop
 
                 endpoints.MapControllerRoute(
                   name: "Product Category Vn",
-                  pattern: "{culture}/danh-muc/{id}", new
+                  pattern: "{culture}/Danh-muc/{id}", new
                   {
                       controller = "Product",
                       action = "Category"
@@ -138,6 +150,21 @@ namespace FoodShop
                 endpoints.MapControllerRoute(
                      name: "default",
                      pattern: "{culture=vi-VN}/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "NewProduct Vn",
+                    pattern: " {culture}/san-pham-moi", new
+                    {
+                        controller = "Product",
+                        action = "NewProduct"
+                    } );
+                endpoints.MapControllerRoute(
+                    name: "NewProduct En",
+                    pattern: " {culture}/new-product", new
+                    {
+                        controller = "Product",
+                        action = "NewProduct"
+                    });
+
             });
         }
     }

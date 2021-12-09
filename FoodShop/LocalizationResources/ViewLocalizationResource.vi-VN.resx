@@ -121,8 +121,20 @@
     <value>Danh mục</value>
     <comment>_navbar</comment>
   </data>
+  <data name="categoryUrl" xml:space="preserve">
+    <value>Danh-muc</value>
+    <comment>Startup</comment>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+    <comment>layout</comment>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Trang chủ</value>
     <comment>_navbar</comment>
+  </data>
+  <data name="Vietnamese" xml:space="preserve">
+    <value>Tiếng Việt</value>
+    <comment>layout</comment>
   </data>
 </root>

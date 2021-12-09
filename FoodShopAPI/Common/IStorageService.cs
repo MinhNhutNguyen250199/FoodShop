@@ -8,7 +8,7 @@ namespace FoodShopAPI.Common
 {
     public interface IStorageService
     {
-        //string GetFileUrl(string fileName);
+        string GetFileUrl(string fileName);
 
         Task SaveFileAsync(Stream mediaBinaryStream, string fileName);
 

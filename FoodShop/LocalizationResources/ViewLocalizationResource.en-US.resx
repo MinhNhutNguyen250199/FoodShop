@@ -121,8 +121,20 @@
     <value>Category</value>
     <comment>_navbar</comment>
   </data>
+  <data name="categoryUrl" xml:space="preserve">
+    <value>Category</value>
+    <comment>startup</comment>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+    <comment>layout</comment>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
     <comment>_navbar</comment>
+  </data>
+  <data name="Vienamese" xml:space="preserve">
+    <value>Vietnamese</value>
+    <comment>layout</comment>
   </data>
 </root>

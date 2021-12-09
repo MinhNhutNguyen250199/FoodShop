@@ -3,8 +3,10 @@
 @using FoodShopModel.Products;
 @{
     ViewData["Title"] = "Home Page";
+    var culture = CultureInfo.CurrentCulture;
 }
-
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration;
+@inject LazZiya.ExpressLocalization.ISharedCultureLocalizer _loc;
 <section id="home-section" class="hero">
     <div class="home-slider owl-carousel">
         <div class="slider-item" style="background-image: url(images/bg_1.jpg);">
@@ -145,75 +147,75 @@
             </div>
         </div>
     </div>
-   
+
     @*them product o day*@
     <div class="container">
         <div class="row">
-          
-                @{
-                    List<List<ProductViewModel>> featuredProducts = new List<List<ProductViewModel>>();
-                    List<ProductViewModel> featuredPart = new List<ProductViewModel>();
+
+            @{
+                List<List<ProductViewModel>> featuredProducts = new List<List<ProductViewModel>>();
+                List<ProductViewModel> featuredPart = new List<ProductViewModel>();
+            }
+
+            @for (int index = 0; index < Model.FeaturedProducts.Count; index++)
+            {
+                featuredPart.Add(Model.FeaturedProducts[index]);
+                if (featuredPart.Count == 4 || Model.FeaturedProducts.Count < 4)
+                {
+                    featuredProducts.Add(featuredPart);
+                    featuredPart = new List<ProductViewModel>();
                 }
 
-                @for (int index = 0; index < Model.FeaturedProducts.Count; index++)
-                {
-                    featuredPart.Add(Model.FeaturedProducts[index]);
-                    if (featuredPart.Count == 4 || Model.FeaturedProducts.Count < 4)
+            }
+            @for (int index = 0; index < featuredProducts.Count; index++)
+            {
+                <div class="item @(index == 0?"active":"")">
+
+                    @foreach (var item in featuredProducts[index])
                     {
-                        featuredProducts.Add(featuredPart);
-                        featuredPart = new List<ProductViewModel>();
-                    }
+                        <div class="col-md-6 col-lg-3 ftco-animate">
 
-                }
-                @for (int index = 0; index < featuredProducts.Count; index++)
-                {
-            <div class="item @(index == 0?"active":"")">
-
-                @foreach (var item in featuredProducts[index])
-                {
-                <div class="col-md-6 col-lg-3 ftco-animate">
-
-                    <div class="product">
-                        <a href="@Url" class="img-prod">
-                            <img class="img-fluid" src="@item.ThumbnailImage" alt="Colorlib Template">
-                            <span class="status">30%</span>
-                            <div class="overlay"></div>
-                        </a>
+                            <div class="product">
+                                <a href="/@culture.Name/@_loc["products"]/@item.Id" class="img-prod">
+                                    <img class="img-fluid" src="@item.ThumbnailImage" alt="Colorlib Template">
+                                    <span class="status">30%</span>
+                                    <div class="overlay"></div>
+                                </a>
 
 
-                        <div class="text py-3 pb-4 px-3 text-center">
+                                <div class="text py-3 pb-4 px-3 text-center">
 
 
-                            <h3><a href="#">@item.Name</a></h3>
+                                    <h3><a href="#">@item.Name</a></h3>
 
 
-                            <div class="d-flex">
-                                <div class="pricing">
-                                    <p class="price"><span class="mr-2 price-dc">@item.OriginalPrice</span><span class="price-sale">@item.Price</span></p>
-                                </div>
-                            </div>
-                            <div class="bottom-area d-flex px-3">
-                                <div class="m-auto d-flex">
-                                    <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
-                                        <span><i class="ion-ios-menu"></i></span>
-                                    </a>
-                                    <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
-                                        <span><i class="ion-ios-cart"></i></span>
-                                    </a>
-                                    <a href="#" class="heart d-flex justify-content-center align-items-center ">
-                                        <span><i class="ion-ios-heart"></i></span>
-                                    </a>
+                                    <div class="d-flex">
+                                        <div class="pricing">
+                                            <p class="price"><span class="mr-2 price-dc">@item.OriginalPrice</span><span class="price-sale">@item.Price</span></p>
+                                        </div>
+                                    </div>
+                                    <div class="bottom-area d-flex px-3">
+                                        <div class="m-auto d-flex">
+                                            <a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+                                                <span><i class="ion-ios-menu"></i></span>
+                                            </a>
+                                            <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                                <span><i class="ion-ios-cart"></i></span>
+                                            </a>
+                                            <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                                <span><i class="ion-ios-heart"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
-                        }
-                    </div>
-                }
-           
-            </div>
-   </div>
+            }
+
+        </div>
+    </div>
 
 
 </section>

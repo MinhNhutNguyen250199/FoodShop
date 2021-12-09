@@ -1,9 +1,11 @@
 ﻿using FoodShop.Models;
+using FoodShopModel.Constants;
 using FoodShopModel.Products;
 using FoodShopServiceAPI;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,10 +15,12 @@ namespace FoodShop.Controllers
     {
         private readonly IProductAPI _productAPI;
         private readonly ICategoryAPI _categoryAPI;
-        public ProductController ( IProductAPI productAPI , ICategoryAPI categoryAPI )
+        private readonly ISlideAPI _slideAPI;
+        public ProductController ( IProductAPI productAPI , ICategoryAPI categoryAPI, ISlideAPI slideAPI )
         {
             _productAPI = productAPI;
             _categoryAPI = categoryAPI;
+            _slideAPI = slideAPI;
         }
 
         public async Task<IActionResult> Category(int id, string culture, int page = 1)
@@ -33,6 +37,17 @@ namespace FoodShop.Controllers
                 Category = await _categoryAPI.GetById(culture, id),
                 Products = products
             }); ;
+        }
+        public async Task<IActionResult> NewProduct()
+        {
+            var culture = CultureInfo.CurrentCulture.Name;
+            var viewModel = new NewProductViewModel
+            {
+                Slides = await _slideAPI.GetAll(),
+                LatestProducts = await _productAPI.GetLatestProducts(culture, SystemConstants.ProductSettings.NumberOfLatestProducts),
+            };
+
+            return View(viewModel);
         }
 
         public async Task<IActionResult> Detail(int id, string culture)

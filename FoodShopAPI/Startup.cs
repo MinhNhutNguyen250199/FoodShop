@@ -66,6 +66,7 @@ namespace FoodShopAPI
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISlideRepository, SlideRepository>();
+           
 
 
 

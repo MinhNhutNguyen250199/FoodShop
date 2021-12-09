@@ -13,5 +13,6 @@ namespace FoodShop.Models
         public CategoryViewModel Category { get; set; }
 
         public PagedResult<ProductViewModel> Products { get; set; }
+        
     }
 }

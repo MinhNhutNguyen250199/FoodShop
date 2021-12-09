@@ -38,7 +38,7 @@ namespace FoodShop.Controllers
             {
                 Slides = await _slideAPI.GetAll(),
                 FeaturedProducts = await _productAPI.GetFeaturedProducts(culture, SystemConstants.ProductSettings.NumberOfFeaturedProducts),
-                LatestProducts = await _productAPI.GetLatestProducts(culture, SystemConstants.ProductSettings.NumberOfLatestProducts),
+               
             };
 
             return View(viewModel);

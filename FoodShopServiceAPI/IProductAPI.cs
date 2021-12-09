@@ -22,5 +22,7 @@ namespace FoodShopServiceAPI
 
         Task<List<ProductViewModel>> GetLatestProducts(string languageId, int take);
 
+        Task<bool> DeleteProduct(int id);
+
     }
 }
