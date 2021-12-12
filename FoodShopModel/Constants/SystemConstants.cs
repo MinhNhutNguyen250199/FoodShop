@@ -10,7 +10,7 @@ namespace FoodShopModel.Constants
     {
         public const string MainConnectionString = "FoodShopDB";
 
-
+        public const string CartSession = "CartSession";
         public class AppSettings
         {
             public const string DefaultLanguageId = "DefaultLanguageId";
