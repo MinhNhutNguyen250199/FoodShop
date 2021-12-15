@@ -43,10 +43,10 @@ namespace FoodShopData.SeedData
                  });
 
             modelBuilder.Entity<CategoryTranslation>().HasData(
-                  new CategoryTranslation() { Id = 1, CategoryId = 1, Name = "Chuối", LanguageId = "vi-VN", SeoAlias = "Chuoi", SeoDescription = "Trái cây", SeoTitle = "Trái cây" },
-                  new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "Banana", LanguageId = "en-US", SeoAlias = "fruit-banana", SeoDescription = "Fruit", SeoTitle = "Fruit" },
-                  new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Táo", LanguageId = "vi-VN", SeoAlias = "Tao", SeoDescription = "Trái cây", SeoTitle = "Trái cây" },
-                  new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Apple", LanguageId = "en-US", SeoAlias = "fruit-apple", SeoDescription = "Fruit", SeoTitle = "Fruit" }
+                  new CategoryTranslation() { Id = 1, CategoryId = 1, Name = "Trái cây", LanguageId = "vi-VN", SeoAlias = "Trai-cay", SeoDescription = "Trái cây", SeoTitle = "Trái cây" },
+                  new CategoryTranslation() { Id = 2, CategoryId = 1, Name = "Fruit", LanguageId = "en-US", SeoAlias = "fruit", SeoDescription = "Fruit", SeoTitle = "Fruit" },
+                  new CategoryTranslation() { Id = 3, CategoryId = 2, Name = "Rau củ", LanguageId = "vi-VN", SeoAlias = "rau-cu", SeoDescription = "rau-cu", SeoTitle = "rau-cu" },
+                  new CategoryTranslation() { Id = 4, CategoryId = 2, Name = "Vegetable", LanguageId = "en-US", SeoAlias = "vegetable", SeoDescription = "vegetable", SeoTitle = "Vegetables" }
                     );
 
             modelBuilder.Entity<Product>().HasData(
@@ -89,11 +89,10 @@ namespace FoodShopData.SeedData
                 );
 
            
-            var roleId =  1 ;
-            var adminId = 1;
-            modelBuilder.Entity<Role>().HasData(new Role
+            modelBuilder.Entity<Role>().HasData(
+                new Role
             {
-                Id = roleId,
+                Id = 1,
                 Name = "admin",
                 NormalizedName = "admin",
                 Description = "Administrator role"
@@ -102,7 +101,7 @@ namespace FoodShopData.SeedData
             var hasher = new PasswordHasher<User>();
             modelBuilder.Entity<User>().HasData(new User
             {
-                Id = adminId,
+                Id = 1,
                 UserName = "admin",
                 NormalizedUserName = "admin",
                 Email = "nmna7911@gmail.com",
@@ -117,8 +116,8 @@ namespace FoodShopData.SeedData
 
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
             {
-                RoleId = roleId,
-                UserId = adminId
+                RoleId = 1,
+                UserId = 2
             });
             modelBuilder.Entity<Slide>().HasData(
               new Slide() { Id = 1, Name = "Second Thumbnail label", Description = "Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.", SortOrder = 1, Url = "#", Image = "/themes/images/carousel/1.png", Status = Status.Active },
