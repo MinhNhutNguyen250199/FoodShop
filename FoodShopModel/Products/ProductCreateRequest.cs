@@ -13,18 +13,25 @@ namespace FoodShopModel.Products
         public decimal Price { set; get; }
         public decimal OriginalPrice { set; get; }
         public int Stock { set; get; }
+        public IFormFile ThumbnailImage { get; set; }
 
         [Required(ErrorMessage = "Bạn phải nhập tên sản phẩm")]
-        public string Name { set; get; }
-        public string Description { set; get; }
-        public string Details { set; get; }
-        public string SeoDescription { set; get; }
-        public string SeoTitle { set; get; }
+        public string NameVN { set; get; }
+        public string DescriptionVN { set; get; }
+        public string DetailsVN { set; get; }
+        public string SeoDescriptionVN { set; get; }
+        public string SeoTitleVN { set; get; }
 
-        public string SeoAlias { get; set; }
-        public string LanguageId { set; get; }
+        public string SeoAliasVN { get; set; }
 
-        public IFormFile ThumbnailImage { get; set; }
+        [Required(ErrorMessage = "Bạn phải nhập tên sản phẩm")]
+        public string NameEN { set; get; }
+        public string DescriptionEN { set; get; }
+        public string DetailsEN { set; get; }
+        public string SeoDescriptionEN { set; get; }
+        public string SeoTitleEN { set; get; }
+
+        public string SeoAliasEN { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ using FoodShopData.SeedData;
 
 namespace FoodShopData.EFContext
 {
-    public class FoodShopDbContext : IdentityDbContext<User, Role, int>
+    public class FoodShopDbContext : IdentityDbContext<User, Role, Guid>
     {
         public FoodShopDbContext(DbContextOptions options) : base(options)
         {

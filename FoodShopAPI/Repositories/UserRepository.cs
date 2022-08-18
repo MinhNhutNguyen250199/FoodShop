@@ -67,7 +67,7 @@ namespace FoodShopAPI.Repository
             return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
         }
 
-        public async Task<ApiResult<UserViewModel>> GetById(int id)
+        public async Task<ApiResult<UserViewModel>> GetById(string id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
@@ -81,7 +81,7 @@ namespace FoodShopAPI.Repository
                 PhoneNumber = user.PhoneNumber,
                 FirstName = user.FirstName,
                 DayOfBirth = user.DayOfBirth,
-                Id = user.Id,
+                Id = user.Id.ToString(),
                 LastName = user.LastName,
                 UserName = user.UserName,
                 Roles = roles
@@ -120,7 +120,7 @@ namespace FoodShopAPI.Repository
             }
             return new ApiErrorResult<bool>("Mật khẩu phải bao gồm chữ hoa, chữ thường, số và kí tự để đảm bảo tính bảo mật");
         }
-        public async Task<ApiResult<bool>> Update(int id, UserUpdateRequest request)
+        public async Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)
         {
             if (await _userManager.Users.AnyAsync(x => x.Email == request.Email && x.Id != id))
             {
@@ -165,7 +165,7 @@ namespace FoodShopAPI.Repository
                     PhoneNumber = x.PhoneNumber,
                     UserName = x.UserName,
                     FirstName = x.FirstName,
-                    Id = x.Id,
+                    Id = x.Id.ToString(),
                     LastName = x.LastName
                 }).ToListAsync();
 
@@ -179,7 +179,7 @@ namespace FoodShopAPI.Repository
             };
             return new ApiSuccessResult<PagedResult<UserViewModel>>(pagedResult);
         }
-        public async Task<ApiResult<bool>> Delete(int id)
+        public async Task<ApiResult<bool>> Delete(Guid id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
@@ -193,7 +193,7 @@ namespace FoodShopAPI.Repository
             return new ApiErrorResult<bool>("Xóa không thành công");
         }
 
-        public async Task<ApiResult<bool>> RoleAssign(int id, RoleAssignRequest request)
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)

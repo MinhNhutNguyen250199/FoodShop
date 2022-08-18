@@ -12,34 +12,34 @@ namespace FoodShopAPI.Repositories
     public interface IProductRepository
     {
 
-        Task<int> Create(ProductCreateRequest request);
+        Task<Guid> Create(ProductCreateRequest request);
 
         Task<int> Update(ProductUpdateRequest request);
 
-        Task<int> Delete(int productId);
+        Task<int> Delete(Guid productId);
 
-        Task<ProductViewModel> GetById(int productId, string languageId);
+        Task<ProductViewModel> GetById(Guid productId, string languageId);
 
-        Task<bool> UpdatePrice(int productId, decimal newPrice);
+        Task<bool> UpdatePrice(Guid productId, decimal newPrice);
 
-        Task<bool> UpdateStock(int productId, int addedQuantity);
+        Task<bool> UpdateStock(Guid productId, int addedQuantity);
 
-        Task AddViewcount(int productId);
+        Task AddViewcount(Guid productId);
 
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request);
 
-        Task<int> AddImage(int productId, ProductImageCreateRequest request);
+        Task<Guid> AddImage(Guid productId, ProductImageCreateRequest request);
 
-        Task<int> RemoveImage(int imageId);
+        Task<int> RemoveImage(Guid imageId);
 
-        Task<int> UpdateImage(int imageId, ProductImageUpdateRequest request);
+        Task<int> UpdateImage(Guid imageId, ProductImageUpdateRequest request);
 
-        Task<ProductImageViewModel> GetImageById(int imageId);
+        Task<ProductImageViewModel> GetImageById(Guid imageId);
 
-        Task<List<ProductImageViewModel>> GetListImages(int productId);
+        Task<List<ProductImageViewModel>> GetListImages(Guid productId);
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
 
-        Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request);
+        Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request);
 
         Task<List<ProductViewModel>> GetFeaturedProducts(string languageId, int take);
 

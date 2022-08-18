@@ -10,6 +10,6 @@ namespace FoodShopAPI.Repositories
     {
 
         Task<List<CategoryViewModel>> GetAll(string languageId);
-        Task<CategoryViewModel> GetById(string languageId, int id);
+        Task<CategoryViewModel> GetById(string languageId, Guid id);
     }
 }

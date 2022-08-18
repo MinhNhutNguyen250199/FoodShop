@@ -9,16 +9,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FoodShopData.Entities;
 
 namespace FoodShopAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   
+
     public class ProductsController : ControllerBase
     {
 
-       
+
         private readonly IProductRepository _productRepository;
         public ProductsController(
             IProductRepository productRepository)
@@ -27,15 +28,16 @@ namespace FoodShopAPI.Controllers
             _productRepository = productRepository;
         }
         [HttpGet("paging")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllPaging([FromQuery] GetManageProductPagingRequest request)
         {
             var products = await _productRepository.GetAllPaging(request);
             return Ok(products);
         }
 
-        //http://localhost:port/Product/1
+        //http://localhost:port/Product/id
         [HttpGet("{productId}/{languageId}")]
-        public async Task<IActionResult> GetById(int productId, string languageId)
+        public async Task<IActionResult> GetById(Guid productId, string languageId)
         {
             var product = await _productRepository.GetById(productId, languageId);
             if (product == null)
@@ -43,7 +45,7 @@ namespace FoodShopAPI.Controllers
             return Ok(product);
         }
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize]
         public async Task<IActionResult> Create([FromForm] ProductCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -51,28 +53,26 @@ namespace FoodShopAPI.Controllers
                 return BadRequest(ModelState);
             }
             var productId = await _productRepository.Create(request);
-            if (productId == 0)
-            { 
+            if (productId == default(Guid))
+            {
 
-            return BadRequest();
+                return BadRequest();
             }
-            return Ok( "Them moi thanh cong" );
-
-
-            //var product = await _productRepository.GetById(productId, request.LanguageId);
-
-            //return CreatedAtAction(nameof(GetById), new { id = productId }, product);
+            var productVN = await _productRepository.GetById(productId, "vi-VN");
+            var productEN = await _productRepository.GetById(productId, "en-US");
+            //return Ok("Them moi thanh cong");
+            return Ok(new List<ProductViewModel>() { productVN,productEN});
         }
         [HttpPut("{productId}")]
         [Consumes("multipart/form-data")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Update([FromRoute] int productId, [FromForm] ProductUpdateRequest request)
+        [Authorize]
+        public async Task<IActionResult> Update([FromRoute] Guid productId, [FromForm] ProductUpdateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            request.Id = productId;
+            request.Id = productId.ToString();
             var affectedResult = await _productRepository.Update(request);
             if (affectedResult == 0)
                 return BadRequest();
@@ -80,8 +80,8 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpDelete("{productId}")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Delete(int productId)
+        [Authorize]
+        public async Task<IActionResult> Delete(Guid productId)
         {
             var affectedResult = await _productRepository.Delete(productId);
             if (affectedResult == 0)
@@ -91,7 +91,7 @@ namespace FoodShopAPI.Controllers
 
         [HttpPatch("{productId}/{newPrice}")]
         [Authorize]
-        public async Task<IActionResult> UpdatePrice(int productId, decimal newPrice)
+        public async Task<IActionResult> UpdatePrice(Guid productId, decimal newPrice)
         {
             var isSuccessful = await _productRepository.UpdatePrice(productId, newPrice);
             if (isSuccessful)
@@ -102,15 +102,15 @@ namespace FoodShopAPI.Controllers
 
         //Images
         [HttpPost("{productId}/images")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> CreateImage(int productId, [FromForm] ProductImageCreateRequest request)
+        [Authorize]
+        public async Task<IActionResult> CreateImage(Guid productId, [FromForm] ProductImageCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
             var imageId = await _productRepository.AddImage(productId, request);
-            if (imageId == 0)
+            if (imageId == default(Guid))
                 return BadRequest();
 
             var image = await _productRepository.GetImageById(imageId);
@@ -119,8 +119,8 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpPut("{productId}/images/{imageId}")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> UpdateImage(int imageId, [FromForm] ProductImageUpdateRequest request)
+        [Authorize]
+        public async Task<IActionResult> UpdateImage(Guid imageId, [FromForm] ProductImageUpdateRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -134,8 +134,8 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpDelete("{productId}/images/{imageId}")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> RemoveImage(int imageId)
+        [Authorize]
+        public async Task<IActionResult> RemoveImage(Guid imageId)
         {
             if (!ModelState.IsValid)
             {
@@ -150,7 +150,7 @@ namespace FoodShopAPI.Controllers
 
 
         [HttpGet("{productId}/images/{imageId}")]
-        public async Task<IActionResult> GetImageById(int productId, int imageId)
+        public async Task<IActionResult> GetImageById(int productId, Guid imageId)
         {
             var image = await _productRepository.GetImageById(imageId);
             if (image == null)
@@ -159,8 +159,8 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpPut("{id}/Categories")]
-        [Authorize(Roles = "admin")]
-        public async Task<IActionResult> CategoryAssign(int id, [FromBody] CategoryAssignRequest request)
+        [Authorize]
+        public async Task<IActionResult> CategoryAssign(Guid id, [FromBody] CategoryAssignRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -173,7 +173,7 @@ namespace FoodShopAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("Featured/{LanguageId}/{Take}")]
+        [HttpGet("Featured/{languageId}/{take}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetFeaturedProducts(int take, string languageId)
         {

@@ -56,7 +56,7 @@ namespace FoodShopAPI.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UserUpdateRequest request)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UserUpdateRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -70,9 +70,9 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            var user = await _userrepository.GetById(id);
+            var user = await _userrepository.GetById(id.ToString());
             return Ok(user);
         }
 
@@ -85,14 +85,14 @@ namespace FoodShopAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _userrepository.Delete(id);
             return Ok(result);
         }
 
         [HttpPut("{id}/roles")]
-        public async Task<IActionResult> RoleAssign(int id, [FromBody] RoleAssignRequest request)
+        public async Task<IActionResult> RoleAssign(Guid id, [FromBody] RoleAssignRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

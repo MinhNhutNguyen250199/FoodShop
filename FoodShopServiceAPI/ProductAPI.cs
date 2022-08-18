@@ -73,15 +73,20 @@ namespace FoodShopServiceAPI
             requestContent.Add(new StringContent(request.Price.ToString()), "price");
             requestContent.Add(new StringContent(request.OriginalPrice.ToString()), "originalPrice");
             requestContent.Add(new StringContent(request.Stock.ToString()), "stock");
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.Name) ? "" : request.Name.ToString()), "name");
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.Description) ? "" : request.Description.ToString()), "description");
-
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.Details) ? "" : request.Details.ToString()), "details");
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoDescription) ? "" : request.SeoDescription.ToString()), "seoDescription");
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoTitle) ? "" : request.SeoTitle.ToString()), "seoTitle");
-            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoAlias) ? "" : request.SeoAlias.ToString()), "seoAlias");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.NameVN) ? "" : request.NameVN.ToString()), "name");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.DescriptionVN) ? "" : request.DescriptionVN.ToString()), "description");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.DetailsVN) ? "" : request.DetailsVN.ToString()), "details");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoDescriptionVN) ? "" : request.SeoDescriptionVN.ToString()), "seoDescription");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoTitleVN) ? "" : request.SeoTitleVN.ToString()), "seoTitle");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoAliasVN) ? "" : request.SeoAliasVN.ToString()), "seoAlias");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.NameEN) ? "" : request.NameEN.ToString()), "name");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.DescriptionEN) ? "" : request.DescriptionEN.ToString()), "description");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.DetailsEN) ? "" : request.DetailsEN.ToString()), "details");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoDescriptionEN) ? "" : request.SeoDescriptionEN.ToString()), "seoDescription");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoTitleEN) ? "" : request.SeoTitleEN.ToString()), "seoTitle");
+            requestContent.Add(new StringContent(string.IsNullOrEmpty(request.SeoAliasEN) ? "" : request.SeoAliasEN.ToString()), "seoAlias");
             //requestContent.Add(new StringContent(languageId), "languageId");
-            requestContent.Add(new StringContent(request.LanguageId.ToString()), "languageId");
+
 
             var response = await client.PostAsync($"/api/Products/", requestContent);
             return response.IsSuccessStatusCode;
@@ -130,7 +135,7 @@ namespace FoodShopServiceAPI
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<ApiResult<bool>> CategoryAssign(int id, CategoryAssignRequest request)
+        public async Task<ApiResult<bool>> CategoryAssign(Guid id, CategoryAssignRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
@@ -149,7 +154,7 @@ namespace FoodShopServiceAPI
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<ProductViewModel> GetById(int id, string languageId)
+        public async Task<ProductViewModel> GetById(Guid id, string languageId)
         {
             var data = await GetAsync<ProductViewModel>($"/api/Products/{id}/{languageId}");
 
@@ -167,7 +172,7 @@ namespace FoodShopServiceAPI
             return data;
         }
 
-        public async Task<bool> DeleteProduct(int id)
+        public async Task<bool> DeleteProduct(Guid id)
         {
             return await Delete($"/api/Products/" + id);
         }

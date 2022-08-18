@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodShopData.Entities
 {
-    public class Role :IdentityRole<int>
+    public class Role :IdentityRole<Guid>
     {
         public string Description { get; set; }
     }

@@ -15,16 +15,16 @@ namespace FoodShopAPI.Repository
 
         Task<ApiResult<bool>> Register(RegisterRequest request);
 
-        Task<ApiResult<bool>> Update(int id, UserUpdateRequest request);
+        Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
 
         Task<ApiResult<PagedResult<UserViewModel>>> GetUsersPaging(GetUserPagingRequest request);
 
-        Task<ApiResult<UserViewModel>> GetById(int id);
+        Task<ApiResult<UserViewModel>> GetById(string id);
 
         Task<List<User>> GetUserList();
-        Task<ApiResult<bool>> Delete(int id);
+        Task<ApiResult<bool>> Delete(Guid id);
 
-        Task<ApiResult<bool>> RoleAssign(int id, RoleAssignRequest request);
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
 
 
     }

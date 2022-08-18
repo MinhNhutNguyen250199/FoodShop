@@ -15,7 +15,7 @@ namespace FoodShopData.Configurations
             builder.ToTable("Carts");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.Property(x => x.Id);
 
 
             builder.HasOne(x => x.Product).WithMany(x => x.Carts).HasForeignKey(x => x.ProductId);

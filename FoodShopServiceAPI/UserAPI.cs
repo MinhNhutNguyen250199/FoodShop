@@ -73,7 +73,7 @@ namespace FoodShopServiceAPI
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<ApiResult<bool>> UpdateUser(int id, UserUpdateRequest request)
+        public async Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);
@@ -92,7 +92,7 @@ namespace FoodShopServiceAPI
             return JsonConvert.DeserializeObject<ApiErrorResult<bool>>(result);
         }
 
-        public async Task<ApiResult<UserViewModel>> GetById (int id)
+        public async Task<ApiResult<UserViewModel>> GetById (Guid id)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Jwt");
             var client = _httpClientFactory.CreateClient();
@@ -106,7 +106,7 @@ namespace FoodShopServiceAPI
             return JsonConvert.DeserializeObject<ApiErrorResult<UserViewModel>>(body);
         }
 
-        public async Task<ApiResult<bool>> Delete(int id)
+        public async Task<ApiResult<bool>> Delete(Guid id)
         {
             var sessions = _httpContextAccessor.HttpContext.Session.GetString("Jwt");
             var client = _httpClientFactory.CreateClient();
@@ -121,7 +121,7 @@ namespace FoodShopServiceAPI
         }
 
 
-        public async Task<ApiResult<bool>> RoleAssign(int id, RoleAssignRequest request)
+        public async Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request)
         {
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri(_configuration["BaseAddress"]);

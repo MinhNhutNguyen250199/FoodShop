@@ -12,18 +12,16 @@ namespace FoodShopServiceAPI
         Task<ApiResult<string>> Authenticate(LoginRequest request);
 
 
-        Task<ApiResult<bool>> UpdateUser(int id, UserUpdateRequest request);
+        Task<ApiResult<bool>> UpdateUser(Guid id, UserUpdateRequest request);
 
         Task<ApiResult<PagedResult<UserViewModel>>> GetUsersPagings(GetUserPagingRequest request);
 
-
-
-        Task<ApiResult<UserViewModel>> GetById(int id);
+        Task<ApiResult<UserViewModel>> GetById(Guid id);
 
         Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest);
-        Task<ApiResult<bool>> Delete(int id);
+        Task<ApiResult<bool>> Delete(Guid id);
 
-        Task<ApiResult<bool>> RoleAssign(int id, RoleAssignRequest request);
+        Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);
     }
 }
 

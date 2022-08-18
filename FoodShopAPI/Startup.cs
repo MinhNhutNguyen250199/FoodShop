@@ -50,15 +50,15 @@ namespace FoodShopAPI
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
 
-            //cach 2 de register Validator
+            //cach 2 de Register Validator
             services.AddControllers()
                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
 
             // DI
-            services.AddTransient<ILanguageRepository, LanguageRepository>();
-            services.AddTransient<UserManager<User>, UserManager<User>>();
-            services.AddTransient<SignInManager<User>, SignInManager<User>>();
-            services.AddTransient<RoleManager<Role>, RoleManager<Role>>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<UserManager<User>, UserManager<User>>();
+            services.AddScoped<SignInManager<User>, SignInManager<User>>();
+            services.AddScoped<RoleManager<Role>, RoleManager<Role>>();
 
             services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -78,7 +78,7 @@ namespace FoodShopAPI
                 {
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n
                       Enter 'Bearer' [space] and then your token in the text input below.
-                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+                      \r\n\r\nExample: 'Bearer yourtoken'",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
@@ -119,12 +119,12 @@ namespace FoodShopAPI
                options.TokenValidationParameters = new TokenValidationParameters()
                {
                    ValidateIssuer = true,
-                   ValidIssuer = issuer,
+                   ValidIssuer = Configuration.GetValue<string>("Jwt:Issuer"),
                    ValidateAudience = true,
-                   ValidAudience = issuer,
+                   ValidAudience = Configuration.GetValue<string>("Jwt:SecretKey"),
                    ValidateLifetime = true,
                    ValidateIssuerSigningKey = true,
-                   ClockSkew = System.TimeSpan.Zero,
+                   ClockSkew = TimeSpan.Zero,
                    IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
                };
            });
@@ -151,7 +151,7 @@ namespace FoodShopAPI
             });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger eShopSolution V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger NMN_FoodShop");
             });
         }
     }

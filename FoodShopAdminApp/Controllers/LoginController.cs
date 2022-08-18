@@ -20,8 +20,7 @@ namespace FoodShopAdminApp.Controllers
     {
         private readonly IUserAPI _userAPI;
         private readonly IConfiguration _configuration;
-        public LoginController(IUserAPI userAPI,
-          IConfiguration configuration)
+        public LoginController(IUserAPI userAPI,IConfiguration configuration)
         {
             _userAPI = userAPI;
             _configuration = configuration;

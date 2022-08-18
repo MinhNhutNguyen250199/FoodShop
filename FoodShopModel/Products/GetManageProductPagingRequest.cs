@@ -12,7 +12,7 @@ namespace FoodShopModel.Products
     {
         public string Keyword { get; set; }
 
-        public int? CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
 
         public string LanguageId { get; set; }
 

@@ -9,7 +9,7 @@ namespace FoodShopData.Entities
 {
     public class Transaction
     {
-        public int Id { set; get; }
+        public Guid Id { set; get; }
         public DateTime TransactionDate { set; get; }
         public string ExternalTransactionId { set; get; }
         public decimal Amount { set; get; }
@@ -18,7 +18,7 @@ namespace FoodShopData.Entities
         public string Message { set; get; }
         public TransactionStatus Status { set; get; }
         public string Provider { set; get; }
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public User User { get; set; }
 

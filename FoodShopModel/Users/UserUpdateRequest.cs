@@ -9,18 +9,16 @@ namespace FoodShopModel.Users
 {
     public class UserUpdateRequest
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Họ và tên")]
         public string Name { get; set; }
-
-       
 
         [Display(Name = "Ngày sinh")]
         [DataType(DataType.Date)]
         public DateTime DayOfBirth { get; set; }
 
-        [Display(Name = "Hòm thư")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Display(Name = "Số điện thoại")]

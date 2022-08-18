@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodShopData.Entities
 {
-    public class User:IdentityUser<int>
+    public class User:IdentityUser<Guid>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

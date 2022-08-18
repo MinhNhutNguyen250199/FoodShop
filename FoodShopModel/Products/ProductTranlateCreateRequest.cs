@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodShopModel.Products
 {
-    public class ProductUpdateRequest
+    public class ProductTranlateCreateRequest
     {
-        public string Id { get; set; }
+        [Required(ErrorMessage = "Bạn phải nhập tên sản phẩm")]
         public string Name { set; get; }
         public string Description { set; get; }
         public string Details { set; get; }
@@ -18,7 +16,6 @@ namespace FoodShopModel.Products
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
-
-        public IFormFile ThumbnailImage { get; set; }
+        
     }
 }

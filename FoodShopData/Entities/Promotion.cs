@@ -9,7 +9,7 @@ namespace FoodShopData.Entities
 {
     public class Promotion
     {
-        public int Id { set; get; }
+        public Guid Id { set; get; }
         public DateTime FromDate { set; get; }
         public DateTime ToDate { set; get; }
         public bool ApplyForAll { set; get; }

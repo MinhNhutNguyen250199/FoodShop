@@ -23,7 +23,7 @@ namespace FoodShop.Controllers
             _slideAPI = slideAPI;
         }
 
-        public async Task<IActionResult> Category(int id, string culture, int page = 1)
+        public async Task<IActionResult> Category(Guid id, string culture, int page = 1)
         {
             var products = await _productAPI.GetPagings(new GetManageProductPagingRequest()
             {
@@ -50,7 +50,7 @@ namespace FoodShop.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> Detail(int id, string culture)
+        public async Task<IActionResult> Detail(Guid id, string culture)
         {
             
             var product = await _productAPI.GetById(id, culture);

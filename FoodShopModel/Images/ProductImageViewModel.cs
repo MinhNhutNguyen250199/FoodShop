@@ -8,9 +8,9 @@ namespace FoodShopModel.Images
 {
     public class ProductImageViewModel
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
         public string ImagePath { get; set; }
 

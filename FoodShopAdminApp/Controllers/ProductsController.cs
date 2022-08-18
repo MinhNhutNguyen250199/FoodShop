@@ -28,7 +28,7 @@ namespace FoodShopAdminApp.Controllers
             _categoryAPI = categoryAPI;
         }
 
-        public async Task<IActionResult> Index(string Keyword, int? categoryId, int pageIndex = 1, int pageSize = 10, string languageId = "vi-VN")
+        public async Task<IActionResult> Index(string Keyword, Guid? categoryId, int pageIndex = 1, int pageSize = 10, string languageId = "vi-VN")
         {
             //var languageId = HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
 
@@ -57,7 +57,7 @@ namespace FoodShopAdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var languageId = "vi-VN";
                 //HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);
@@ -119,7 +119,7 @@ namespace FoodShopAdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CategoryAssign(int id)
+        public async Task<IActionResult> CategoryAssign(Guid id)
         {
             var roleAssignRequest = await GetCategoryAssignRequest(id);
             return View(roleAssignRequest);
@@ -145,7 +145,7 @@ namespace FoodShopAdminApp.Controllers
             return View(roleAssignRequest);
         }
 
-        private async Task<CategoryAssignRequest> GetCategoryAssignRequest(int id)
+        private async Task<CategoryAssignRequest> GetCategoryAssignRequest(Guid id)
         {
             var languageId = "vi-VN"; /*HttpContext.Session.GetString(SystemConstants.AppSettings.DefaultLanguageId);*/
 
@@ -156,7 +156,7 @@ namespace FoodShopAdminApp.Controllers
             {
                 categoryAssignRequest.Categories.Add(new SelectItem()
                 {
-                    Id = role.Id.ToString(),
+                    Id = role.Id,
                     Name = role.Name,
                     Selected = productObj.Categories.Contains(role.Name)
                 });
@@ -165,7 +165,7 @@ namespace FoodShopAdminApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             return View(new ProductDeleteRequest()
             {

@@ -52,12 +52,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Cart", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -65,14 +62,14 @@ namespace FoodShopData.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -85,18 +82,15 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsShowOnHome")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -113,14 +107,14 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
                             IsShowOnHome = true,
                             SortOrder = 1,
                             Status = 1
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"),
                             IsShowOnHome = true,
                             SortOrder = 2,
                             Status = 1
@@ -129,15 +123,12 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.CategoryTranslation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LanguageId")
                         .IsRequired()
@@ -174,54 +165,51 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CategoryId = 1,
+                            Id = new Guid("313fd2cb-982a-4b7d-bf88-245c071cc8a5"),
+                            CategoryId = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
                             LanguageId = "vi-VN",
-                            Name = "Chuối",
-                            SeoAlias = "Chuoi",
+                            Name = "Trái cây",
+                            SeoAlias = "Trai-cay",
                             SeoDescription = "Trái cây",
                             SeoTitle = "Trái cây"
                         },
                         new
                         {
-                            Id = 2,
-                            CategoryId = 1,
+                            Id = new Guid("f954c0e2-9666-4db8-a3c9-3dd194a50129"),
+                            CategoryId = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
                             LanguageId = "en-US",
-                            Name = "Banana",
-                            SeoAlias = "fruit-banana",
+                            Name = "Fruit",
+                            SeoAlias = "fruit",
                             SeoDescription = "Fruit",
                             SeoTitle = "Fruit"
                         },
                         new
                         {
-                            Id = 3,
-                            CategoryId = 2,
+                            Id = new Guid("f43414ac-ac43-4fc3-82a1-da4a4497493c"),
+                            CategoryId = new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"),
                             LanguageId = "vi-VN",
-                            Name = "Táo",
-                            SeoAlias = "Tao",
-                            SeoDescription = "Trái cây",
-                            SeoTitle = "Trái cây"
+                            Name = "Rau củ",
+                            SeoAlias = "rau-cu",
+                            SeoDescription = "rau-cu",
+                            SeoTitle = "rau-cu"
                         },
                         new
                         {
-                            Id = 4,
-                            CategoryId = 2,
+                            Id = new Guid("cbb00877-6cb9-4ca9-ab80-f65ce8a8f34c"),
+                            CategoryId = new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"),
                             LanguageId = "en-US",
-                            Name = "Apple",
-                            SeoAlias = "fruit-apple",
-                            SeoDescription = "Fruit",
-                            SeoTitle = "Fruit"
+                            Name = "Vegetable",
+                            SeoAlias = "vegetable",
+                            SeoDescription = "vegetable",
+                            SeoTitle = "Vegetables"
                         });
                 });
 
             modelBuilder.Entity("FoodShopData.Entities.Contact", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -286,17 +274,14 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Order", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 11, 11, 19, 24, 43, 304, DateTimeKind.Local).AddTicks(8741));
+                        .HasDefaultValue(new DateTime(2022, 8, 17, 13, 35, 2, 739, DateTimeKind.Local).AddTicks(1118));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -322,8 +307,8 @@ namespace FoodShopData.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -334,11 +319,11 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -355,12 +340,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -394,8 +376,8 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            DateCreated = new DateTime(2021, 11, 11, 19, 24, 43, 320, DateTimeKind.Local).AddTicks(6372),
+                            Id = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"),
+                            DateCreated = new DateTime(2022, 8, 17, 13, 35, 2, 762, DateTimeKind.Local).AddTicks(3176),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -405,12 +387,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.ProductImage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Caption")
                         .HasColumnType("nvarchar(200)")
@@ -430,8 +409,8 @@ namespace FoodShopData.Migrations
                     b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -445,11 +424,11 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.ProductInCategory", b =>
                 {
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CategoryId", "ProductId");
 
@@ -460,19 +439,16 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = 1,
-                            ProductId = 1
+                            CategoryId = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
+                            ProductId = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d")
                         });
                 });
 
             modelBuilder.Entity("FoodShopData.Entities.ProductTranslation", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -492,8 +468,8 @@ namespace FoodShopData.Migrations
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SeoAlias")
                         .IsRequired()
@@ -517,24 +493,24 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("bcd421ca-7a74-4a8e-985c-d975c3fb0ab1"),
                             Description = "Chuoi",
                             Details = "Chuoi",
                             LanguageId = "vi-VN",
                             Name = "Chuoi",
-                            ProductId = 1,
+                            ProductId = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"),
                             SeoAlias = "trai-cay-chuoi",
                             SeoDescription = "Chuoi",
                             SeoTitle = "Chuoi"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("64b10cb8-a7ac-4234-b67c-83b84858dad7"),
                             Description = "Banana-Fruit",
                             Details = "Banana-Fruit",
                             LanguageId = "en-US",
                             Name = "Banana",
-                            ProductId = 1,
+                            ProductId = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"),
                             SeoAlias = "Banana-Fruit",
                             SeoDescription = "Banana-Fruit",
                             SeoTitle = "Banana-Fruit"
@@ -543,12 +519,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Promotion", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("ApplyForAll")
                         .HasColumnType("bit");
@@ -585,10 +558,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -619,11 +591,19 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            ConcurrencyStamp = "0a872ec1-c992-4e13-b0f6-65151f867928",
+                            Id = new Guid("eea852ed-eba8-4c9d-9389-dfa62924e657"),
+                            ConcurrencyStamp = "71d505f7-6e59-4263-9a8d-f8ad2ce9abd6",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("83a944a0-82a3-4603-b6b5-a93d8028b47e"),
+                            ConcurrencyStamp = "246c6669-13d7-4bec-af9f-36c7c32426ab",
+                            Description = "Customer Role",
+                            Name = "Customer",
+                            NormalizedName = "Customer"
                         });
                 });
 
@@ -731,12 +711,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.Transaction", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -762,8 +739,8 @@ namespace FoodShopData.Migrations
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -774,10 +751,9 @@ namespace FoodShopData.Migrations
 
             modelBuilder.Entity("FoodShopData.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -854,9 +830,9 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("dd9b03e4-cdbf-43e0-a290-0469d8457d33"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9a5a8aa2-7a92-47c5-b8db-ef20efe0e089",
+                            ConcurrencyStamp = "ea2b0e0e-2293-431f-8818-f27167207ef6",
                             DayOfBirth = new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nmna7911@gmail.com",
                             EmailConfirmed = true,
@@ -865,12 +841,54 @@ namespace FoodShopData.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nmna7911@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIiDZWiYnB2ILn/j/GEFhfuQMoQ+559APHCbnXGgs7q4b8QlUYuvoYbhwhLUy8GBaw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGsGxCApmRqtbnyXGiezVGbPtQw5LmxCtFK/KoQARIhm5zrEkOMbvJMd8pcySsVTUQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("b040a3d9-0901-4a10-bc07-cd4c53923663"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "47a3077d-f5f3-42f1-82d4-3beb4061f033",
+                            DayOfBirth = new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "nmna79@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Nhut",
+                            LastName = "Nguyen",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "nmna79@gmail.com",
+                            NormalizedUserName = "customer1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJRXbCZLtu8+G4CruQHbjzlm8ysPgbR8etz98ySc+HUSCRStXaXCRuXqb0qiDJbs/w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "",
+                            TwoFactorEnabled = false,
+                            UserName = "customer1"
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -891,9 +909,30 @@ namespace FoodShopData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+                    b.ToTable("RoleClaims");
+                });
 
-                    b.ToTable("AspNetRoleClaims");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
@@ -914,12 +953,10 @@ namespace FoodShopData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("UserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -930,14 +967,62 @@ namespace FoodShopData.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("UserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("dd9b03e4-cdbf-43e0-a290-0469d8457d33"),
+                            RoleId = new Guid("eea852ed-eba8-4c9d-9389-dfa62924e657")
+                        },
+                        new
+                        {
+                            UserId = new Guid("b040a3d9-0901-4a10-bc07-cd4c53923663"),
+                            RoleId = new Guid("83a944a0-82a3-4603-b6b5-a93d8028b47e")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
@@ -950,22 +1035,13 @@ namespace FoodShopData.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            RoleId = 1
-                        });
+                    b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -979,6 +1055,27 @@ namespace FoodShopData.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("FoodShopData.Entities.Cart", b =>
@@ -1083,7 +1180,7 @@ namespace FoodShopData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("FoodShopData.Entities.Role", null)
                         .WithMany()
@@ -1092,7 +1189,7 @@ namespace FoodShopData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("FoodShopData.Entities.User", null)
                         .WithMany()
@@ -1101,7 +1198,7 @@ namespace FoodShopData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("FoodShopData.Entities.User", null)
                         .WithMany()
@@ -1110,7 +1207,7 @@ namespace FoodShopData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
                     b.HasOne("FoodShopData.Entities.Role", null)
                         .WithMany()
@@ -1125,7 +1222,7 @@ namespace FoodShopData.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("FoodShopData.Entities.User", null)
                         .WithMany()

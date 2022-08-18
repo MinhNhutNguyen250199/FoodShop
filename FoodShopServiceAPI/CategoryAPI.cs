@@ -23,7 +23,7 @@ namespace FoodShopServiceAPI
             return await GetListAsync<CategoryViewModel>("/api/Categories?languageId=" + languageId);
         }
 
-        public async Task<CategoryViewModel> GetById(string languageId, int id)
+        public async Task<CategoryViewModel> GetById(string languageId, Guid id)
         {
             return await GetAsync<CategoryViewModel>($"/api/Categories/{id}/{languageId}");
         }

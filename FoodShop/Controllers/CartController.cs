@@ -22,7 +22,7 @@ namespace FoodShop.Controllers
         {   
             return View();
         }
-        public async Task<IActionResult> AddToCart(int id, string languageId)
+        public async Task<IActionResult> AddToCart(Guid id, string languageId)
         {
             var product = await _productAPI.GetById(id, languageId);
 
@@ -61,7 +61,7 @@ namespace FoodShop.Controllers
                 currentCart = JsonConvert.DeserializeObject<List<CartItemViewModel>>(session);
             return Ok(currentCart);
         }
-        public IActionResult UpdateCart(int id, int quantity)
+        public IActionResult UpdateCart(Guid id, int quantity)
         {
             var session = HttpContext.Session.GetString(SystemConstants.CartSession);
             List<CartItemViewModel> currentCart = new List<CartItemViewModel>();

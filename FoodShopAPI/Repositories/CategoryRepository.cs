@@ -31,7 +31,7 @@ namespace FoodShopAPI.Repositories
             }).ToListAsync();
         }
 
-        public async Task<CategoryViewModel> GetById(string languageId, int id)
+        public async Task<CategoryViewModel> GetById(string languageId, Guid id)
         {
             var query = from c in _context.Categories
                         join ct in _context.CategoryTranslations on c.Id equals ct.CategoryId

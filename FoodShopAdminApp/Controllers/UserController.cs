@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Threading.Tasks;
 
 namespace FoodShopAdminApp.Controllers
@@ -42,7 +43,7 @@ namespace FoodShopAdminApp.Controllers
             return View(data.ResultObj);
         }
         [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(Guid id)
         {
             var result = await _userAPI.GetById(id);
             return View(result.ResultObj);
@@ -62,7 +63,7 @@ namespace FoodShopAdminApp.Controllers
             return RedirectToAction("Index", "Login");
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(Guid id)
         {
             var result = await _userAPI.GetById(id);
             if (result.IsSuccessed)
@@ -81,7 +82,7 @@ namespace FoodShopAdminApp.Controllers
             return RedirectToAction("Error", "Home");
         }
         [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _userAPI.GetById(id);
             if (result.IsSuccessed)
@@ -149,7 +150,7 @@ namespace FoodShopAdminApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> RoleAssign(int id)
+        public async Task<IActionResult> RoleAssign(Guid id)
         {
             var roleAssignRequest = await GetRoleAssignRequest(id);
             return View(roleAssignRequest);
@@ -175,7 +176,8 @@ namespace FoodShopAdminApp.Controllers
             return View(roleAssignRequest);
         }
 
-        private async Task<RoleAssignRequest> GetRoleAssignRequest(int id)
+
+        private async Task<RoleAssignRequest> GetRoleAssignRequest(Guid id)
         {
             var userObj = await _userAPI.GetById(id);
             var roleObj = await _roleAPI.GetAll();
@@ -184,7 +186,7 @@ namespace FoodShopAdminApp.Controllers
             {
                 roleAssignRequest.Roles.Add(new SelectItem()
                 {
-                    Id = role.Id.ToString(),
+                    Id = role.Id,
                     Name = role.Name,
                     Selected = userObj.ResultObj.Roles.Contains(role.Name)
                 });
