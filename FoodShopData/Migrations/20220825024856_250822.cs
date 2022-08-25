@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodShopData.Migrations
 {
-    public partial class _17082022 : Migration
+    public partial class _250822 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,9 @@ namespace FoodShopData.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 250, nullable: false),
                     LastName = table.Column<string>(maxLength: 250, nullable: false),
-                    DayOfBirth = table.Column<DateTime>(nullable: false)
+                    DayOfBirth = table.Column<DateTime>(nullable: false),
+                    RefreshToekn = table.Column<string>(nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,21 +147,6 @@ namespace FoodShopData.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoleClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoleClaims", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Slides",
                 columns: table => new
                 {
@@ -175,63 +162,6 @@ namespace FoodShopData.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Slides", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserClaims", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserLogins",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LoginProvider = table.Column<string>(nullable: true),
-                    ProviderKey = table.Column<string>(nullable: true),
-                    ProviderDisplayName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserLogins", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false),
-                    RoleId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserRoles", x => new { x.UserId, x.RoleId });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LoginProvider = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserTokens", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -345,7 +275,7 @@ namespace FoodShopData.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2022, 8, 17, 13, 35, 2, 739, DateTimeKind.Local).AddTicks(1118)),
+                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2022, 8, 25, 9, 48, 55, 886, DateTimeKind.Local).AddTicks(2909)),
                     UserId = table.Column<Guid>(nullable: false),
                     ShipName = table.Column<string>(maxLength: 200, nullable: false),
                     ShipAddress = table.Column<string>(maxLength: 200, nullable: false),
@@ -567,17 +497,17 @@ namespace FoodShopData.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("83a944a0-82a3-4603-b6b5-a93d8028b47e"), "246c6669-13d7-4bec-af9f-36c7c32426ab", "Customer Role", "Customer", "Customer" },
-                    { new Guid("eea852ed-eba8-4c9d-9389-dfa62924e657"), "71d505f7-6e59-4263-9a8d-f8ad2ce9abd6", "Administrator role", "admin", "admin" }
+                    { new Guid("a83361d9-45c2-4897-827b-f5892f671a3e"), "b0bbaeec-f99f-4028-bcd9-9c8f8aa46fe6", "Customer Role", "Customer", "Customer" },
+                    { new Guid("9a799928-c0b7-4759-868a-e7066425bbe1"), "7640da2d-f7b2-456a-99b2-721d64eeb9fe", "Administrator role", "admin", "admin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DayOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DayOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToekn", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("dd9b03e4-cdbf-43e0-a290-0469d8457d33"), 0, "ea2b0e0e-2293-431f-8818-f27167207ef6", new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "nmna7911@gmail.com", true, "Nhut", "Nguyen", false, null, "nmna7911@gmail.com", "admin", "AQAAAAEAACcQAAAAEGsGxCApmRqtbnyXGiezVGbPtQw5LmxCtFK/KoQARIhm5zrEkOMbvJMd8pcySsVTUQ==", null, false, "", false, "admin" },
-                    { new Guid("b040a3d9-0901-4a10-bc07-cd4c53923663"), 0, "47a3077d-f5f3-42f1-82d4-3beb4061f033", new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "nmna79@gmail.com", true, "Nhut", "Nguyen", false, null, "nmna79@gmail.com", "customer1", "AQAAAAEAACcQAAAAEJRXbCZLtu8+G4CruQHbjzlm8ysPgbR8etz98ySc+HUSCRStXaXCRuXqb0qiDJbs/w==", null, false, "", false, "customer1" }
+                    { new Guid("888cb9aa-2365-42ea-b435-39ab1627f1c0"), 0, "c4a903ce-bdb8-40d8-abd2-3637c4c0c2a4", new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "nmna7911@gmail.com", true, "Nhut", "Nguyen", false, null, "nmna7911@gmail.com", "admin", "AQAAAAEAACcQAAAAENMMwg0C6/D6npxKlGjqGIfwiQN/oM0h4GWQ+UuQ6D8CYr+SPEsK05VmpOKtaDgKXQ==", null, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "admin" },
+                    { new Guid("56a69c5f-5a1a-4feb-941f-cccaf3a8500f"), 0, "d00d6c60-226c-49fe-8b0f-721cbb34c120", new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "nmna79@gmail.com", true, "Nhut", "Nguyen", false, null, "nmna79@gmail.com", "customer1", "AQAAAAEAACcQAAAAEF5EE75HflAxCDwMhuQ0tIQGOEy/3QjIAPxihhVgI9lwyiKJYQDCu3euD6SNaxK5Xg==", null, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "", false, "customer1" }
                 });
 
             migrationBuilder.InsertData(
@@ -585,8 +515,8 @@ namespace FoodShopData.Migrations
                 columns: new[] { "Id", "IsShowOnHome", "ParentId", "SortOrder", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"), true, null, 1, 1 },
-                    { new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"), true, null, 2, 1 }
+                    { new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"), true, null, 1, 1 },
+                    { new Guid("e0e53d41-0471-4eb7-9bb8-6c5c13199184"), true, null, 2, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -601,7 +531,7 @@ namespace FoodShopData.Migrations
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "DateCreated", "IsFeatured", "OriginalPrice", "Price", "SeoAlias" },
-                values: new object[] { new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"), new DateTime(2022, 8, 17, 13, 35, 2, 762, DateTimeKind.Local).AddTicks(3176), null, 100000m, 200000m, null });
+                values: new object[] { new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa"), new DateTime(2022, 8, 25, 9, 48, 55, 906, DateTimeKind.Local).AddTicks(9525), null, 100000m, 200000m, null });
 
             migrationBuilder.InsertData(
                 table: "Slides",
@@ -621,8 +551,8 @@ namespace FoodShopData.Migrations
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[,]
                 {
-                    { new Guid("dd9b03e4-cdbf-43e0-a290-0469d8457d33"), new Guid("eea852ed-eba8-4c9d-9389-dfa62924e657") },
-                    { new Guid("b040a3d9-0901-4a10-bc07-cd4c53923663"), new Guid("83a944a0-82a3-4603-b6b5-a93d8028b47e") }
+                    { new Guid("888cb9aa-2365-42ea-b435-39ab1627f1c0"), new Guid("9a799928-c0b7-4759-868a-e7066425bbe1") },
+                    { new Guid("56a69c5f-5a1a-4feb-941f-cccaf3a8500f"), new Guid("a83361d9-45c2-4897-827b-f5892f671a3e") }
                 });
 
             migrationBuilder.InsertData(
@@ -630,24 +560,24 @@ namespace FoodShopData.Migrations
                 columns: new[] { "Id", "CategoryId", "LanguageId", "Name", "SeoAlias", "SeoDescription", "SeoTitle" },
                 values: new object[,]
                 {
-                    { new Guid("313fd2cb-982a-4b7d-bf88-245c071cc8a5"), new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"), "vi-VN", "Trái cây", "Trai-cay", "Trái cây", "Trái cây" },
-                    { new Guid("f43414ac-ac43-4fc3-82a1-da4a4497493c"), new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"), "vi-VN", "Rau củ", "rau-cu", "rau-cu", "rau-cu" },
-                    { new Guid("f954c0e2-9666-4db8-a3c9-3dd194a50129"), new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"), "en-US", "Fruit", "fruit", "Fruit", "Fruit" },
-                    { new Guid("cbb00877-6cb9-4ca9-ab80-f65ce8a8f34c"), new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"), "en-US", "Vegetable", "vegetable", "vegetable", "Vegetables" }
+                    { new Guid("936929cf-ec7e-472c-bda4-b01c450c1a4d"), new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"), "vi-VN", "Trái cây", "Trai-cay", "Trái cây", "Trái cây" },
+                    { new Guid("254958ad-e3ad-40a4-b5e2-1d7678589688"), new Guid("e0e53d41-0471-4eb7-9bb8-6c5c13199184"), "vi-VN", "Rau củ", "rau-cu", "rau-cu", "rau-cu" },
+                    { new Guid("1bbb5d0b-7619-426a-b406-eb3bcb582dfe"), new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"), "en-US", "Fruit", "fruit", "Fruit", "Fruit" },
+                    { new Guid("b4d1c138-7b39-488c-be81-292226ac47d9"), new Guid("e0e53d41-0471-4eb7-9bb8-6c5c13199184"), "en-US", "Vegetable", "vegetable", "vegetable", "Vegetables" }
                 });
 
             migrationBuilder.InsertData(
                 table: "ProductInCategories",
                 columns: new[] { "CategoryId", "ProductId" },
-                values: new object[] { new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"), new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d") });
+                values: new object[] { new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"), new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa") });
 
             migrationBuilder.InsertData(
                 table: "ProductTranslations",
                 columns: new[] { "Id", "Description", "Details", "LanguageId", "Name", "ProductId", "SeoAlias", "SeoDescription", "SeoTitle" },
                 values: new object[,]
                 {
-                    { new Guid("bcd421ca-7a74-4a8e-985c-d975c3fb0ab1"), "Chuoi", "Chuoi", "vi-VN", "Chuoi", new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"), "trai-cay-chuoi", "Chuoi", "Chuoi" },
-                    { new Guid("64b10cb8-a7ac-4234-b67c-83b84858dad7"), "Banana-Fruit", "Banana-Fruit", "en-US", "Banana", new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"), "Banana-Fruit", "Banana-Fruit", "Banana-Fruit" }
+                    { new Guid("8c9da3a3-f89c-4c8a-99e6-983cf3771d9c"), "Chuoi", "Chuoi", "vi-VN", "Chuoi", new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa"), "trai-cay-chuoi", "Chuoi", "Chuoi" },
+                    { new Guid("43d6ae29-a949-4043-a118-aa2117182821"), "Banana-Fruit", "Banana-Fruit", "en-US", "Banana", new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa"), "Banana-Fruit", "Banana-Fruit", "Banana-Fruit" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -790,25 +720,10 @@ namespace FoodShopData.Migrations
                 name: "Promotions");
 
             migrationBuilder.DropTable(
-                name: "RoleClaims");
-
-            migrationBuilder.DropTable(
                 name: "Slides");
 
             migrationBuilder.DropTable(
                 name: "Transactions");
-
-            migrationBuilder.DropTable(
-                name: "UserClaims");
-
-            migrationBuilder.DropTable(
-                name: "UserLogins");
-
-            migrationBuilder.DropTable(
-                name: "UserRoles");
-
-            migrationBuilder.DropTable(
-                name: "UserTokens");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

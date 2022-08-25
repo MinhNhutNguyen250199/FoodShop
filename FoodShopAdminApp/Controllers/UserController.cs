@@ -105,7 +105,7 @@ namespace FoodShopAdminApp.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            var result = await _userAPI.RegisterUser(request);
+            var result = await _userAPI.RegisterAdminUser(request);
             if (result.IsSuccessed)
             {
                 TempData["result"] = "Thêm mới người dùng thành công";

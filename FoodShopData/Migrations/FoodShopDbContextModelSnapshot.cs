@@ -107,14 +107,14 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
+                            Id = new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"),
                             IsShowOnHome = true,
                             SortOrder = 1,
                             Status = 1
                         },
                         new
                         {
-                            Id = new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"),
+                            Id = new Guid("e0e53d41-0471-4eb7-9bb8-6c5c13199184"),
                             IsShowOnHome = true,
                             SortOrder = 2,
                             Status = 1
@@ -165,8 +165,8 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("313fd2cb-982a-4b7d-bf88-245c071cc8a5"),
-                            CategoryId = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
+                            Id = new Guid("936929cf-ec7e-472c-bda4-b01c450c1a4d"),
+                            CategoryId = new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"),
                             LanguageId = "vi-VN",
                             Name = "Trái cây",
                             SeoAlias = "Trai-cay",
@@ -175,8 +175,8 @@ namespace FoodShopData.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f954c0e2-9666-4db8-a3c9-3dd194a50129"),
-                            CategoryId = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
+                            Id = new Guid("1bbb5d0b-7619-426a-b406-eb3bcb582dfe"),
+                            CategoryId = new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"),
                             LanguageId = "en-US",
                             Name = "Fruit",
                             SeoAlias = "fruit",
@@ -185,8 +185,8 @@ namespace FoodShopData.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f43414ac-ac43-4fc3-82a1-da4a4497493c"),
-                            CategoryId = new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"),
+                            Id = new Guid("254958ad-e3ad-40a4-b5e2-1d7678589688"),
+                            CategoryId = new Guid("e0e53d41-0471-4eb7-9bb8-6c5c13199184"),
                             LanguageId = "vi-VN",
                             Name = "Rau củ",
                             SeoAlias = "rau-cu",
@@ -195,8 +195,8 @@ namespace FoodShopData.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cbb00877-6cb9-4ca9-ab80-f65ce8a8f34c"),
-                            CategoryId = new Guid("54fe095f-2c22-43ff-886f-b4dd7587d214"),
+                            Id = new Guid("b4d1c138-7b39-488c-be81-292226ac47d9"),
+                            CategoryId = new Guid("e0e53d41-0471-4eb7-9bb8-6c5c13199184"),
                             LanguageId = "en-US",
                             Name = "Vegetable",
                             SeoAlias = "vegetable",
@@ -281,7 +281,7 @@ namespace FoodShopData.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 8, 17, 13, 35, 2, 739, DateTimeKind.Local).AddTicks(1118));
+                        .HasDefaultValue(new DateTime(2022, 8, 25, 9, 48, 55, 886, DateTimeKind.Local).AddTicks(2909));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -376,8 +376,8 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"),
-                            DateCreated = new DateTime(2022, 8, 17, 13, 35, 2, 762, DateTimeKind.Local).AddTicks(3176),
+                            Id = new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa"),
+                            DateCreated = new DateTime(2022, 8, 25, 9, 48, 55, 906, DateTimeKind.Local).AddTicks(9525),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -439,8 +439,8 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            CategoryId = new Guid("9944fc8d-e066-4879-afe6-7eff0b3a56f7"),
-                            ProductId = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d")
+                            CategoryId = new Guid("6c7bf136-cdf3-46c9-83d7-a1a1d57e2b67"),
+                            ProductId = new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa")
                         });
                 });
 
@@ -493,24 +493,24 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("bcd421ca-7a74-4a8e-985c-d975c3fb0ab1"),
+                            Id = new Guid("8c9da3a3-f89c-4c8a-99e6-983cf3771d9c"),
                             Description = "Chuoi",
                             Details = "Chuoi",
                             LanguageId = "vi-VN",
                             Name = "Chuoi",
-                            ProductId = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"),
+                            ProductId = new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa"),
                             SeoAlias = "trai-cay-chuoi",
                             SeoDescription = "Chuoi",
                             SeoTitle = "Chuoi"
                         },
                         new
                         {
-                            Id = new Guid("64b10cb8-a7ac-4234-b67c-83b84858dad7"),
+                            Id = new Guid("43d6ae29-a949-4043-a118-aa2117182821"),
                             Description = "Banana-Fruit",
                             Details = "Banana-Fruit",
                             LanguageId = "en-US",
                             Name = "Banana",
-                            ProductId = new Guid("865ff0ac-8d9a-492c-984e-0f93f44d023d"),
+                            ProductId = new Guid("4d183d47-ecde-4900-98b4-1fe78cf8c8aa"),
                             SeoAlias = "Banana-Fruit",
                             SeoDescription = "Banana-Fruit",
                             SeoTitle = "Banana-Fruit"
@@ -591,16 +591,16 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("eea852ed-eba8-4c9d-9389-dfa62924e657"),
-                            ConcurrencyStamp = "71d505f7-6e59-4263-9a8d-f8ad2ce9abd6",
+                            Id = new Guid("9a799928-c0b7-4759-868a-e7066425bbe1"),
+                            ConcurrencyStamp = "7640da2d-f7b2-456a-99b2-721d64eeb9fe",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = new Guid("83a944a0-82a3-4603-b6b5-a93d8028b47e"),
-                            ConcurrencyStamp = "246c6669-13d7-4bec-af9f-36c7c32426ab",
+                            Id = new Guid("a83361d9-45c2-4897-827b-f5892f671a3e"),
+                            ConcurrencyStamp = "b0bbaeec-f99f-4028-bcd9-9c8f8aa46fe6",
                             Description = "Customer Role",
                             Name = "Customer",
                             NormalizedName = "Customer"
@@ -805,6 +805,12 @@ namespace FoodShopData.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RefreshToekn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -830,9 +836,9 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("dd9b03e4-cdbf-43e0-a290-0469d8457d33"),
+                            Id = new Guid("888cb9aa-2365-42ea-b435-39ab1627f1c0"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea2b0e0e-2293-431f-8818-f27167207ef6",
+                            ConcurrencyStamp = "c4a903ce-bdb8-40d8-abd2-3637c4c0c2a4",
                             DayOfBirth = new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nmna7911@gmail.com",
                             EmailConfirmed = true,
@@ -841,17 +847,18 @@ namespace FoodShopData.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nmna7911@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGsGxCApmRqtbnyXGiezVGbPtQw5LmxCtFK/KoQARIhm5zrEkOMbvJMd8pcySsVTUQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENMMwg0C6/D6npxKlGjqGIfwiQN/oM0h4GWQ+UuQ6D8CYr+SPEsK05VmpOKtaDgKXQ==",
                             PhoneNumberConfirmed = false,
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = new Guid("b040a3d9-0901-4a10-bc07-cd4c53923663"),
+                            Id = new Guid("56a69c5f-5a1a-4feb-941f-cccaf3a8500f"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "47a3077d-f5f3-42f1-82d4-3beb4061f033",
+                            ConcurrencyStamp = "d00d6c60-226c-49fe-8b0f-721cbb34c120",
                             DayOfBirth = new DateTime(1999, 1, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nmna79@gmail.com",
                             EmailConfirmed = true,
@@ -860,8 +867,9 @@ namespace FoodShopData.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "nmna79@gmail.com",
                             NormalizedUserName = "customer1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJRXbCZLtu8+G4CruQHbjzlm8ysPgbR8etz98ySc+HUSCRStXaXCRuXqb0qiDJbs/w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF5EE75HflAxCDwMhuQ0tIQGOEy/3QjIAPxihhVgI9lwyiKJYQDCu3euD6SNaxK5Xg==",
                             PhoneNumberConfirmed = false,
+                            RefreshTokenExpiryTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "customer1"
@@ -891,27 +899,6 @@ namespace FoodShopData.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RoleClaims");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
@@ -935,27 +922,6 @@ namespace FoodShopData.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserClaims");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
@@ -977,27 +943,6 @@ namespace FoodShopData.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("UserLogins");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -1015,27 +960,14 @@ namespace FoodShopData.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("dd9b03e4-cdbf-43e0-a290-0469d8457d33"),
-                            RoleId = new Guid("eea852ed-eba8-4c9d-9389-dfa62924e657")
+                            UserId = new Guid("888cb9aa-2365-42ea-b435-39ab1627f1c0"),
+                            RoleId = new Guid("9a799928-c0b7-4759-868a-e7066425bbe1")
                         },
                         new
                         {
-                            UserId = new Guid("b040a3d9-0901-4a10-bc07-cd4c53923663"),
-                            RoleId = new Guid("83a944a0-82a3-4603-b6b5-a93d8028b47e")
+                            UserId = new Guid("56a69c5f-5a1a-4feb-941f-cccaf3a8500f"),
+                            RoleId = new Guid("a83361d9-45c2-4897-827b-f5892f671a3e")
                         });
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -1055,27 +987,6 @@ namespace FoodShopData.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("UserTokens");
                 });
 
             modelBuilder.Entity("FoodShopData.Entities.Cart", b =>

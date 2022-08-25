@@ -4,7 +4,6 @@ using FoodShopData.Entities;
 using FoodShopModel.Common;
 using FoodShopModel.Users;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -27,6 +26,7 @@ namespace FoodShopAPI.Repository
         private readonly IConfiguration _configuration;
         private readonly FoodShopDbContext _context;
        
+
         public UserRepository(FoodShopDbContext context, UserManager<User> userManager, SignInManager<User> signInManager,
             RoleManager<Role> roleManager, IConfiguration configuration)
         {
@@ -53,15 +53,16 @@ namespace FoodShopAPI.Repository
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.GivenName,user.FirstName),
                 new Claim(ClaimTypes.Role, string.Join(";",roles)),
-                new Claim(ClaimTypes.Name, request.UserName)
+                new Claim(ClaimTypes.Name, request.UserName),
+                
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(_configuration["Jwt:Issuer"],
-                _configuration["Jwt:Issuer"],
+                _configuration["Jwt:Audien"],
                 claims,
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: creds);
 
             return new ApiSuccessResult<string>(new JwtSecurityTokenHandler().WriteToken(token));
@@ -89,10 +90,7 @@ namespace FoodShopAPI.Repository
             return new ApiSuccessResult<UserViewModel>(userViewModel);
         }
 
-
-
-
-        public async Task<ApiResult<bool>> Register(RegisterRequest request)
+        public async Task<ApiResult<bool>> Register(RegisterRequest request, string roleName)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
             if (user != null)
@@ -106,19 +104,23 @@ namespace FoodShopAPI.Repository
 
             user = new User()
             {
+                Id = Guid.NewGuid(),
                 DayOfBirth = request.DayOfBirth,
                 Email = request.Email,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 UserName = request.UserName,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber                           
             };
             var result = await _userManager.CreateAsync(user,  request.Password);
+
+           
             if (result.Succeeded)
             {
-                return new ApiSuccessResult<bool>();
+                await _userManager.AddToRoleAsync(user, roleName);               
+                return new ApiSuccessResult<bool>();                
             }
-            return new ApiErrorResult<bool>("Mật khẩu phải bao gồm chữ hoa, chữ thường, số và kí tự để đảm bảo tính bảo mật");
+            return new ApiErrorResult<bool>("Failed");
         }
         public async Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request)
         {
@@ -132,11 +134,11 @@ namespace FoodShopAPI.Repository
             user.FirstName = request.FirstName;
             user.LastName = request.LastName;
             user.PhoneNumber = request.PhoneNumber;
-
-            var result = await _userManager.UpdateAsync(user);
+            var result = await _userManager.UpdateAsync(user);           
             if (result.Succeeded)
             {
                 return new ApiSuccessResult<bool>();
+
             }
             return new ApiErrorResult<bool>("Cập nhật không thành công");
         }
@@ -218,7 +220,6 @@ namespace FoodShopAPI.Repository
                     await _userManager.AddToRoleAsync(user, roleName);
                 }
             }
-
             return new ApiSuccessResult<bool>();
         }
 

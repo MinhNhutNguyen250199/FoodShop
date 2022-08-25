@@ -1,10 +1,14 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using FoodShopAPI.Repositories;
 using FoodShopAPI.Repository;
 using FoodShopData.EFContext;
+using FoodShopData.Entities;
 using FoodShopModel.Users;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 namespace FoodShopAPI.Controllers
 {
@@ -16,11 +20,14 @@ namespace FoodShopAPI.Controllers
      
         private readonly IUserRepository _userrepository;
         private readonly FoodShopDbContext _context;
-        public LoginController(FoodShopDbContext context, IUserRepository userRepository)                     
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly UserManager<User> _userManager;
+        public LoginController(FoodShopDbContext context, IUserRepository userRepository, IRefreshTokenRepository refreshTokenRepository, UserManager<User> userManager)                     
         {
             _context = context;
-
+            _refreshTokenRepository = refreshTokenRepository;
             _userrepository = userRepository;
+            _userManager = userManager;
         }
 
         [HttpPost("authenticate")]
@@ -30,23 +37,88 @@ namespace FoodShopAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _userrepository.Authencate(request);
-
+            var result = await _userrepository.Authencate(request);          
+            var refreshtoken = _refreshTokenRepository.GenerateRefreshToken();
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            user.RefreshToekn = refreshtoken;
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+             var createRefreshToken = await _userManager.UpdateAsync(user);
+            if (!createRefreshToken.Succeeded)
+            {
+                return BadRequest("Create Refresh Token fail");
+            }
             if (string.IsNullOrEmpty(result.ResultObj))
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPost("RefreshToken")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);           
+            //var refreshtoken = _refreshTokenRepository.GenerateRefreshToken();
+            var claimAccessToken = _refreshTokenRepository.GetPrincipalFromExpiredToken(request.AccessToken);
+            var username = claimAccessToken.Identity.Name;
+            var user = _userManager.FindByNameAsync(username).Result;
+            //var user = _userManager.GetUserAsync(claimAccessToken).Result;
+            if (user is null /*|| user.RefreshToekn != refreshToken*/ || user.RefreshTokenExpiryTime <= DateTime.Now  )
+            {
+                return BadRequest("Invalid client request");
+            }
+            var newAccessToken =  _refreshTokenRepository.GenerateAccessToken(claimAccessToken);
+            var newRefreshToken = _refreshTokenRepository.GenerateRefreshToken();
+            user.RefreshToekn = newRefreshToken;
+            var createRefreshToken = await _userManager.UpdateAsync(user);
+            if (!createRefreshToken.Succeeded)
+            {
+                return BadRequest("Create Refresh Token fail");
+            }
+            return Ok(new AuthenticateRespone() { 
+            AccesToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
+            RefreshToken = newRefreshToken           
+            });
+        }
+
+        [HttpPost, Authorize]
+        [Route("revoke")]
+        public IActionResult Revoke()
+        {
+            var username = User.Identity.Name;
+            var user = _userManager.FindByNameAsync(username).Result;
+            if (user == null) return BadRequest();
+            user.RefreshToekn = null;
+            _userManager.UpdateAsync(user);
+            return NoContent();
+        }
+
+        [HttpPost ("RegisterAdmin")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _userrepository.Register(request,"admin");
+            if (!result.IsSuccessed)
             {
                 return BadRequest(result);
             }
             return Ok(result);
         }
 
-        [HttpPost ("Register")]
+        [HttpPost("RegisterCustomer")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> RegisterCustomer([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _userrepository.Register(request);
+            var result = await _userrepository.Register(request, "Customer");
             if (!result.IsSuccessed)
             {
                 return BadRequest(result);

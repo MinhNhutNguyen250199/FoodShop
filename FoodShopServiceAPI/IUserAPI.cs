@@ -18,7 +18,10 @@ namespace FoodShopServiceAPI
 
         Task<ApiResult<UserViewModel>> GetById(Guid id);
 
-        Task<ApiResult<bool>> RegisterUser(RegisterRequest registerRequest);
+        Task<ApiResult<bool>> RegisterAdminUser(RegisterRequest registerRequest);
+
+        Task<ApiResult<bool>> RegisterCustomerUser(RegisterRequest registerRequest);
+
         Task<ApiResult<bool>> Delete(Guid id);
 
         Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);

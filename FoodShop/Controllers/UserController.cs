@@ -100,7 +100,7 @@ namespace FoodShop.Controllers
                 return View(registerRequest);
             }
 
-            var result = await _userAPI.RegisterUser(registerRequest);
+            var result = await _userAPI.RegisterCustomerUser(registerRequest);
             if (!result.IsSuccessed)
             {
                 ModelState.AddModelError("", result.Message);

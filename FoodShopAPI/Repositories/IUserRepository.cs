@@ -13,7 +13,7 @@ namespace FoodShopAPI.Repository
         //Task<List<User>> GetUserList();
         Task<ApiResult<string>> Authencate(LoginRequest request);
 
-        Task<ApiResult<bool>> Register(RegisterRequest request);
+        Task<ApiResult<bool>> Register(RegisterRequest request, string roleName);
 
         Task<ApiResult<bool>> Update(Guid id, UserUpdateRequest request);
 
@@ -22,6 +22,7 @@ namespace FoodShopAPI.Repository
         Task<ApiResult<UserViewModel>> GetById(string id);
 
         Task<List<User>> GetUserList();
+
         Task<ApiResult<bool>> Delete(Guid id);
 
         Task<ApiResult<bool>> RoleAssign(Guid id, RoleAssignRequest request);

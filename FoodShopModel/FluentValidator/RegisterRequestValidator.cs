@@ -29,7 +29,9 @@ namespace FoodShopModel.FluentValidator
             RuleFor(x => x.UserName).NotEmpty().WithMessage("User name is required");
 
             RuleFor(x => x.Password).NotEmpty().WithMessage("Password is required")
-                .MinimumLength(6).WithMessage("Password is at least 6 characters");
+                .MinimumLength(6).WithMessage("Password is at least 6 characters")
+                .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$")
+                .WithMessage(" assword must include uppercase, lowercase letters, numbers and characters to ensure security");
 
             RuleFor(x => x).Custom((request, context) =>
             {
@@ -38,6 +40,7 @@ namespace FoodShopModel.FluentValidator
                     context.AddFailure("Confirm password is not match");
                 }
             });
+            
         }
     }
 }

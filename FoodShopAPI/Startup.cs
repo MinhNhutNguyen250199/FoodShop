@@ -57,19 +57,15 @@ namespace FoodShopAPI
             // DI
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<UserManager<User>, UserManager<User>>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddScoped<SignInManager<User>, SignInManager<User>>();
             services.AddScoped<RoleManager<Role>, RoleManager<Role>>();
-
             services.AddScoped<IStorageService, StorageService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ISlideRepository, SlideRepository>();
-           
-
-
-
             // Add Swagger
             services.AddSwaggerGen(c =>
             {
@@ -107,7 +103,8 @@ namespace FoodShopAPI
             string signingKey = Configuration.GetValue<string>("Jwt:SecretKey");
             byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
 
-            services.AddAuthentication(opt =>
+            services
+            .AddAuthentication(opt =>
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -121,11 +118,11 @@ namespace FoodShopAPI
                    ValidateIssuer = true,
                    ValidIssuer = Configuration.GetValue<string>("Jwt:Issuer"),
                    ValidateAudience = true,
-                   ValidAudience = Configuration.GetValue<string>("Jwt:SecretKey"),
+                   ValidAudience = Configuration.GetValue<string>("Jwt:Audien"),
                    ValidateLifetime = true,
-                   ValidateIssuerSigningKey = true,
-                   ClockSkew = TimeSpan.Zero,
-                   IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
+                   ValidateIssuerSigningKey = true,                  
+                   IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes),
+                   ClockSkew = TimeSpan.Zero
                };
            });
         }

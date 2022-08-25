@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -11,10 +11,10 @@
     "FoodShopAdminApp": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5051",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:5051"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -23,6 +23,5 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
-
   }
 }
